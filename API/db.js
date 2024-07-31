@@ -1,5 +1,6 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
+const PokemonModel = require('./src/models/pokemonModel')
 
 const conn = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
@@ -7,4 +8,6 @@ const conn = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env
     dialect: 'postgres'
 });
 
-module.exports = { conn };
+PokemonModel(conn)
+
+module.exports = { conn, PokemonModel: conn.models.Pokemon };

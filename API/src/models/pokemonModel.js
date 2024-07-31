@@ -4,7 +4,7 @@ const validator = require('validator');
 
 module.exports = (sequelize) => {
 
-    sequelize.define('pokemon', {
+    sequelize.define('Pokemon', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
