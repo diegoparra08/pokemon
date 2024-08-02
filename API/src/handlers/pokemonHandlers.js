@@ -1,4 +1,4 @@
-const { getByNameController, getByIdController } = require('../controllers/pokemonControllers');
+const { getByNameController, getByIdController, getAllPokemonsController } = require('../controllers/pokemonControllers');
 
 
 const getPokemonById = async (req, res) => {
@@ -20,7 +20,7 @@ const getPokemonById = async (req, res) => {
         return res.status(500).json({ error: error.message })
     }
 
-}
+};
 
 const getPokemonByName = async (req, res) => {
     const { name } = req.query;
@@ -45,7 +45,27 @@ const getPokemonByName = async (req, res) => {
         
         return res.status(500).json({ error: error.message })
     }
+};
 
-}
+const getAllPokemons = async (req, res) => {
+    
+    const { index } = req.query;
+    
+    try {
+        
+        if (!index) {
 
-module.exports = { getPokemonById, getPokemonByName };
+            throw new Error('Page index missing') 
+        } else {
+
+            const allPokemons = await getAllPokemonsController(index);
+            return res.status(200).json(allPokemons);
+
+        }
+    } catch (error) {
+        
+        return res.status(500).json({ error: error.message })
+    }
+};
+
+module.exports = { getPokemonById, getPokemonByName, getAllPokemons };

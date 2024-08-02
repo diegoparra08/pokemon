@@ -12,8 +12,6 @@ function App() {
 
   const location = useLocation();
 
-
-
   return (
     <>
       {location.pathname !== '/' && < NavBar />}

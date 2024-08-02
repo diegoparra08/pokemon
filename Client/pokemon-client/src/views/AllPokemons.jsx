@@ -4,7 +4,5 @@ export const AllPokemons = () => {
 
     return (
         <Cards/>
-
-        
     );
 }

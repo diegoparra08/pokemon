@@ -13,7 +13,7 @@ const mapPokemon = (pokemon) => {
         weight: pokemon.data.weight,
         abilities: pokemon.data.abilities.map(ability => ({
             abilityName: ability.ability.name
-           })),
+        })),
         image: pokemon.data.sprites.front_default
     }
 
@@ -26,12 +26,12 @@ const getByIdController = async (id) => {
         where: { id }
     })
 
-    if(!pokemonInDB) {
+    if (!pokemonInDB) {
 
         const response = await axios(`https://pokeapi.co/api/v2/pokemon/${id}`);
 
         const pokemonDetail = mapPokemon(response);
-    
+
         postPokemonToDB(pokemonDetail)
         console.log("Not in DB, brought from API");
         return pokemonDetail;
@@ -39,13 +39,12 @@ const getByIdController = async (id) => {
     };
 
     console.log("Found in DB");
-    return pokemonInDB; 
+    return pokemonInDB;
 
-   
 }
 
 const getByNameController = async (name) => {
-    
+
     const response = await axios(`https://pokeapi.co/api/v2/pokemon/${name}`);
 
     const pokemonDetail = mapPokemon(response);
@@ -55,14 +54,33 @@ const getByNameController = async (name) => {
     return pokemonDetail;
 };
 
+const getAllPokemonsController = async (index) => {
+
+    let pokemonsArray = [];
+
+    const itemsPerPage = 12;
+    const startIndex = (index - 1) * itemsPerPage + 1;
+    const endIndex = index * itemsPerPage;
+
+    for(let i = startIndex; i <= endIndex; i++){
+        const response = await axios(`https://pokeapi.co/api/v2/pokemon/${i}`);
+        const pokemonDetail = mapPokemon(response);
+        pokemonsArray.push(pokemonDetail);
+    }
+    return pokemonsArray;
+
+};
+
+
+
 const postPokemonToDB = async (pokemonDetail) => {
 
-    const {id, name, height, weight, abilities, image} = pokemonDetail;
+    const { id, name, height, weight, abilities, image } = pokemonDetail;
 
     try {
 
         const [postPokemon, created] = await PokemonModel.findOrCreate({
-            where: { name }, 
+            where: { name },
             defaults: {
                 id,
                 name,
@@ -74,9 +92,9 @@ const postPokemonToDB = async (pokemonDetail) => {
         });
 
         return postPokemon;
-        
+
     } catch (error) {
-        
+
         console.error("Error in postPokemonToDB:", error);
         throw new Error('Failed to save Pokémon to the database');
 
@@ -85,4 +103,4 @@ const postPokemonToDB = async (pokemonDetail) => {
 
 
 
-module.exports = { getByIdController, getByNameController };
+module.exports = { getByIdController, getByNameController, getAllPokemonsController };
