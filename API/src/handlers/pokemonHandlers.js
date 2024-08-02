@@ -42,28 +42,21 @@ const getPokemonByName = async (req, res) => {
             return res.status(200).json(getByName);
         }
     } catch (error) {
-        
+
         return res.status(500).json({ error: error.message })
     }
 };
 
 const getAllPokemons = async (req, res) => {
     
-    const { index } = req.query;
-    
     try {
-        
-        if (!index) {
 
-            throw new Error('Page index missing') 
-        } else {
+        const allPokemons = await getAllPokemonsController();
+        return res.status(200).json(allPokemons);
 
-            const allPokemons = await getAllPokemonsController(index);
-            return res.status(200).json(allPokemons);
 
-        }
     } catch (error) {
-        
+
         return res.status(500).json({ error: error.message })
     }
 };

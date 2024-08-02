@@ -22,7 +22,7 @@ export const NavBar = () => {
                 bgcolor: 'primary.light',
                 
             }}>
-                <Button>
+                <Button component={Link} to="/">
                 <img
                     src={logo}
                     alt="Fourth"

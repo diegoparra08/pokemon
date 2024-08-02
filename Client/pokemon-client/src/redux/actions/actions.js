@@ -3,16 +3,17 @@ import axios from 'axios';
 export const GET_POKEMON_BY_ID = 'GET_POKEMON_BY_ID';
 export const GET_POKEMONS = 'GET_POKEMONS';
 export const GET_POKEMON_BY_NAME = 'GET_POKEMON_BY_NAME';
+export const CLEAR_DETAIL = 'CLEAR_DETAIL';
 
 const pokemonsEndpoint = 'http://localhost:3001/poke-API/pokemons'
 
-export const getPokemons = (index) => {
+export const getPokemons = () => {
 
     return async (dispatch) => {
 
         try {
-
-            const { data } = await axios(`${pokemonsEndpoint}/all?index=${index}`);
+            
+            const { data } = await axios(`${pokemonsEndpoint}/all`);
 
             dispatch({
                 type: GET_POKEMONS,
@@ -65,3 +66,9 @@ export const getPokemonByName = (name) => {
         }
     }
 };
+
+export function clearDetail() {
+    return {
+        type: CLEAR_DETAIL,
+    }
+}

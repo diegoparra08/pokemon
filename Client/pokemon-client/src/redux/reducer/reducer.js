@@ -1,4 +1,4 @@
-import { GET_POKEMON_BY_ID, GET_POKEMONS, GET_POKEMON_BY_NAME } from '../actions/actions'
+import { GET_POKEMON_BY_ID, GET_POKEMONS, GET_POKEMON_BY_NAME, CLEAR_DETAIL } from '../actions/actions'
 
 const initialState = {
   pokemonDetail: {},
@@ -25,6 +25,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         pokemonDetailByName: action.payload,
+      }
+
+    case CLEAR_DETAIL:
+      return {
+        ...state,
+        pokemonDetail: {},
       }
 
     default:

@@ -54,15 +54,11 @@ const getByNameController = async (name) => {
     return pokemonDetail;
 };
 
-const getAllPokemonsController = async (index) => {
+const getAllPokemonsController = async () => {
 
     let pokemonsArray = [];
 
-    const itemsPerPage = 12;
-    const startIndex = (index - 1) * itemsPerPage + 1;
-    const endIndex = index * itemsPerPage;
-
-    for(let i = startIndex; i <= endIndex; i++){
+    for(let i = 1; i <= 120; i++){
         const response = await axios(`https://pokeapi.co/api/v2/pokemon/${i}`);
         const pokemonDetail = mapPokemon(response);
         pokemonsArray.push(pokemonDetail);
@@ -70,7 +66,6 @@ const getAllPokemonsController = async (index) => {
     return pokemonsArray;
 
 };
-
 
 
 const postPokemonToDB = async (pokemonDetail) => {

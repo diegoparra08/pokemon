@@ -90,7 +90,7 @@ export const Home = () => {
       >
         <Button
           variant="contained"
-          
+          component={Link} to="/all"
           sx={{
             
             borderRadius: '10%',
@@ -102,7 +102,7 @@ export const Home = () => {
             },
           }}
         >
-          Button 3
+          View all Pokemon cards
         </Button>
       </Box>
       

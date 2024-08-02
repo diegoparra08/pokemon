@@ -6,6 +6,7 @@ import './App.css'
 import { Home } from './views/Home.jsx';
 import { NavBar } from './components/NavBar/NavBar.jsx';
 import { AllPokemons } from './views/AllPokemons.jsx';
+import { DetailCard } from './components/Cards/DetailCard.jsx';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
 
         <Route path="/" element={<Home />} />
         <Route path='/all' element={<AllPokemons />} />
+        <Route path='/detail/:id' element={<DetailCard />} /> 
 
       </Routes>
 

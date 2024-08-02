@@ -1,8 +1,13 @@
+import { Link } from "react-router-dom"
+
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 
 import pikachu from '../../images/pikachu.jpg'
 
-export const SingleCard = ({ pokemon }) => {
+ const SingleCard = ({ pokemon }) => {
+
+    const pokemonDetailPage = `/detail/${pokemon.id}`
+    
 
     return (
         <Card sx={{ width: '360px', height: '220px', boxShadow: 8 }} >
@@ -22,7 +27,7 @@ export const SingleCard = ({ pokemon }) => {
                     </Box>
                 </Box>
                 <CardActions>
-                    <Button sx={{ color: 'black', bgcolor: 'secondary.main', fontSize: '0.75rem' }}>View details</Button>
+                    <Button component={Link} to={pokemonDetailPage} sx={{ color: 'black', bgcolor: 'secondary.main', fontSize: '0.75rem' }}>View details</Button>
                 </CardActions>
             </CardContent>
 
@@ -31,3 +36,4 @@ export const SingleCard = ({ pokemon }) => {
         </Card>
     );
 };
+export default SingleCard;
